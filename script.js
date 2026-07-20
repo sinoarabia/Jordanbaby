@@ -9,7 +9,6 @@ const locations = [
 const gridContainer = document.getElementById('voting-grid');
 const thankYouMsg = document.getElementById('thank-you-msg');
 
-// 计算总票数，用于显示比例条
 function getTotalVotes() {
     return locations.reduce((total, loc) => {
         const savedVotes = parseInt(localStorage.getItem(`votes_${loc.id}`)) || loc.initialVotes;
@@ -17,29 +16,28 @@ function getTotalVotes() {
     }, 0);
 }
 
-// 渲染投票卡片
 function renderVotingCards() {
-    gridContainer.innerHTML = ''; // 清空容器
+    gridContainer.innerHTML = ''; 
     const totalVotes = getTotalVotes();
     const hasVoted = localStorage.getItem('jordanbaby_has_voted') === 'true';
 
     locations.forEach(loc => {
-        // 获取本地存储的票数，如果没有则使用初始票数
         const currentVotes = parseInt(localStorage.getItem(`votes_${loc.id}`)) || loc.initialVotes;
         const percentage = totalVotes === 0 ? 0 : Math.round((currentVotes / totalVotes) * 100);
 
         const card = document.createElement('div');
         card.className = 'vote-card';
 
+        // 彻底移除了这里的中文，保留纯粹的阿拉伯语和英语
         card.innerHTML = `
-            <h3>${loc.name}</h3>
-            <p dir="rtl">${loc.nameAr}</p>
+            <h3 dir="rtl">${loc.nameAr}</h3>
+            <p>${loc.name}</p>
             <div class="vote-bar-container">
                 <div class="vote-bar" style="width: ${percentage}%"></div>
             </div>
-            <p>${currentVotes} 票 (${percentage}%)</p>
+            <p>${currentVotes} Votes (${percentage}%)</p>
             <button class="vote-btn" onclick="submitVote('${loc.id}')" ${hasVoted ? 'disabled' : ''}>
-                ${hasVoted ? '已投票 Voted' : '投票 Vote / تصويت'}
+                ${hasVoted ? 'تم التصويت / Voted' : 'تصويت / Vote'}
             </button>
         `;
         gridContainer.appendChild(card);
@@ -50,26 +48,20 @@ function renderVotingCards() {
     }
 }
 
-// 处理投票点击事件
 function submitVote(locationId) {
-    // 检查是否已经投过票
     if (localStorage.getItem('jordanbaby_has_voted') === 'true') {
-        alert("您已经投过票了！You have already voted!");
+        alert("You have already voted! !لقد قمت بالتصويت بالفعل");
         return;
     }
 
-    // 找到被投票的地点并增加票数
     const location = locations.find(l => l.id === locationId);
     let currentVotes = parseInt(localStorage.getItem(`votes_${location.id}`)) || location.initialVotes;
     currentVotes++;
     
-    // 更新本地存储
     localStorage.setItem(`votes_${location.id}`, currentVotes);
     localStorage.setItem('jordanbaby_has_voted', 'true');
 
-    // 重新渲染UI
     renderVotingCards();
 }
 
-// 页面加载完成后执行渲染
 document.addEventListener('DOMContentLoaded', renderVotingCards);
