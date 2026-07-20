@@ -1,4 +1,6 @@
-/* 全局重置与基础设置 */
+/* =========================================
+   全局重置与基础设置
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -10,10 +12,12 @@ body {
     background-color: #fcf9f2; 
     color: #4a4a4a;
     line-height: 1.6;
-    overflow-x: hidden; /* 核心防崩溃：防止手机端横向滚动条出现 */
+    overflow-x: hidden; /* 防止横向滚动条出现 */
 }
 
-/* 头部样式 */
+/* =========================================
+   头部样式
+   ========================================= */
 .header {
     text-align: center;
     padding: 30px 20px;
@@ -58,7 +62,9 @@ body {
     line-height: 1.4;
 }
 
-/* 核心主图样式 */
+/* =========================================
+   核心主图样式
+   ========================================= */
 .hero {
     width: 100%;
     max-width: 1200px;
@@ -73,7 +79,9 @@ body {
     display: block;
 }
 
-/* 服务卡片布局优化 (适应手机端) */
+/* =========================================
+   服务卡片布局 (响应式优化)
+   ========================================= */
 .services {
     display: flex;
     flex-wrap: wrap;
@@ -87,8 +95,8 @@ body {
 .service-card {
     background: #ffffff;
     flex: 1;
-    min-width: 300px; /* 调整为300px，完美适配小屏手机 */
-    padding: 30px 20px; /* 左右内边距微调，防拥挤 */
+    min-width: 300px; /* 适配小屏手机 */
+    padding: 30px 20px; 
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     border-top: 4px solid #e0c3a8;
@@ -175,7 +183,9 @@ body {
     color: #7f8c8d;
 }
 
-/* 投票区样式优化 (适应手机端单列) */
+/* =========================================
+   投票区样式
+   ========================================= */
 .voting-section {
     background-color: #f4eee6;
     padding: 40px 20px; 
@@ -194,7 +204,7 @@ body {
 
 .voting-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 确保在手机端变成单列 */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     max-width: 1000px;
     margin: 0 auto;
@@ -225,7 +235,7 @@ body {
     width: 100%;
     background-color: #e0e0e0;
     border-radius: 20px;
-    height: 12px; /* 进度条调细一点更精致 */
+    height: 12px; 
     margin-bottom: 15px;
     overflow: hidden;
 }
@@ -248,7 +258,7 @@ body {
     transition: background 0.3s;
     font-weight: bold;
     width: 100%; 
-    max-width: 200px; /* 在卡片内宽度适中，手指更容易点击 */
+    max-width: 200px; 
 }
 
 .vote-btn:hover {
@@ -269,11 +279,13 @@ body {
     line-height: 1.5;
 }
 
-/* 页脚优化与全球国旗样式 */
+/* =========================================
+   页脚与高清国旗样式
+   ========================================= */
 footer {
     text-align: center;
     padding: 30px 20px;
-    background-color: #2c3e50; /* 加深一点背景色，显得更稳重 */
+    background-color: #2c3e50; 
     color: #fff;
     font-size: 0.95rem;
     position: relative;
@@ -284,33 +296,35 @@ footer {
     margin-bottom: 15px;
     display: flex;
     justify-content: center;
-    gap: 12px; /* 国旗之间的间距 */
+    gap: 15px; 
     flex-wrap: wrap;
+    align-items: center;
 }
 
-.global-flags .flag {
-    font-size: 1.5rem; /* 国旗大小 */
+.global-flags .fi {
+    width: 28px !important;
+    height: 20px !important;
+    border-radius: 2px;
     transition: transform 0.3s ease;
     cursor: default;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); /* 给国旗加上一点立体阴影 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
 }
 
-.global-flags .flag:hover {
-    transform: translateY(-3px) scale(1.1); /* 鼠标悬浮时微微放大跳动 */
+.global-flags .fi:hover {
+    transform: translateY(-3px) scale(1.15); 
 }
 
 footer p {
-    color: #a0b2c6; /* 版权文字颜色稍微调暗，突出上方的国旗 */
+    color: #a0b2c6; 
     letter-spacing: 1px;
 }
 
 /* =========================================
    WhatsApp 悬浮组件核心样式 (完美适配手机版)
    ========================================= */
-
 .whatsapp-widget {
     position: fixed;
-    bottom: 25px; /* 提高一点，防止被手机浏览器的底部工具栏遮挡 */
+    bottom: 25px; 
     right: 20px; 
     z-index: 9999;
     display: flex;
@@ -320,7 +334,7 @@ footer p {
 
 .wa-icon {
     background-color: #25D366;
-    width: 60px; /* 稍微调小，避免在手机上占屏幕太大比例 */
+    width: 60px; 
     height: 60px;
     border-radius: 50%;
     display: flex;
@@ -338,7 +352,7 @@ footer p {
 }
 
 .wa-icon svg {
-    width: 35px; /* SVG 图标等比例缩小 */
+    width: 35px; 
     height: 35px;
 }
 
@@ -350,7 +364,7 @@ footer p {
 
 .wa-popup {
     display: none; 
-    width: 300px; /* 修改为300px，完美适配绝大多数小尺寸手机屏幕 */
+    width: 300px; 
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -359,11 +373,9 @@ footer p {
     transform-origin: bottom right;
 }
 
-/* 屏幕非常小时(如旧款iPhoneSE)，确保弹窗不溢出屏幕外 */
+/* 屏幕极小时适配 */
 @media (max-width: 350px) {
-    .wa-popup {
-        width: 280px;
-    }
+    .wa-popup { width: 280px; }
 }
 
 .wa-popup.show {
