@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jordan Baby Care Center</title>
+    <!-- 引入全球高清国旗图标库，确保不受系统字体限制 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +14,8 @@
     <header class="header">
         <h1 class="logo">JordanBaby.com</h1>
         <h2 class="sub-logo">Jordan Baby Care Center</h2>
-       <div class="slogan-container">
+        <div class="slogan-container">
+            <!-- 强制精准换行，保持标语视觉平衡 -->
             <p class="slogan ar" dir="rtl">رعاية خبراء للأطفال، لعب إبداعي وملاذ للأمهات<br>نختار أول منزل لنا في عمان! صوتوا لموقعنا المفضل.</p>
             <p class="slogan en">Expert Baby Care, Creative Play & Mom's Sanctuary<br>We're Choosing Our First Amman Home! Vote for Your Favorite Location.</p>
         </div>
@@ -23,12 +26,10 @@
         <img src="12111.jpg" alt="Jordan Baby Care Center Interior" class="main-image">
     </section>
 
-    <!-- 服务内容展示区 -->
+    <!-- 服务内容展示区 (彻底重构了排版，Emoji均在最右侧句首，阿拉伯语在上方居中) -->
     <section class="services">
-        
         <!-- 宝宝护理板块 -->
         <div class="service-card">
-            <!-- 注意：在HTML里把Emoji放在左边，dir="rtl"会让它渲染在最右边 -->
             <h2 dir="rtl">🍼 العناية الاحترافية بالطفل</h2>
             <p class="subtitle">Baby Professional Care</p>
             <ul>
@@ -53,7 +54,7 @@
 
         <!-- 儿童娱乐室板块 -->
         <div class="service-card highlight">
-            <!-- 修复了数字和括号的顺序问题 -->
+            <!-- 修复数字顺序 -->
             <h2 dir="rtl">🧸 غرفة ترفيه للأطفال (3-7 سنوات)</h2>
             <div class="subtitle-group">
                 <p class="subtitle ar-sub" dir="rtl">مجانية مع الخدمات</p>
@@ -108,28 +109,28 @@
         </div>
         
         <div id="voting-grid" class="voting-grid">
-            <!-- 投票选项由 JavaScript 动态生成 -->
+            <!-- 投票选项将由 JavaScript 动态生成填入这里 -->
         </div>
         
         <p id="thank-you-msg" class="hidden-msg">🎉 !شكراً لتصويتكم<br>Thank you for voting!</p>
     </section>
 
+    <!-- 页脚与高清国旗区 -->
     <footer>
-        <!-- 新增的全球国旗展示区 -->
         <div class="global-flags">
-            <span class="flag" title="Jordan">🇯🇴</span>
-            <span class="flag" title="China">🇨🇳</span>
-            <span class="flag" title="United Arab Emirates">🇦🇪</span>
-            <span class="flag" title="United States">🇺🇸</span>
-            <span class="flag" title="United Kingdom">🇬🇧</span>
-            <span class="flag" title="Switzerland">🇨🇭</span>
-            <span class="flag" title="Japan">🇯🇵</span>
-            <span class="flag" title="Singapore">🇸🇬</span>
+            <i class="fi fi-jo" title="Jordan"></i>
+            <i class="fi fi-cn" title="China"></i>
+            <i class="fi fi-ae" title="United Arab Emirates"></i>
+            <i class="fi fi-us" title="United States"></i>
+            <i class="fi fi-gb" title="United Kingdom"></i>
+            <i class="fi fi-ch" title="Switzerland"></i>
+            <i class="fi fi-jp" title="Japan"></i>
+            <i class="fi fi-sg" title="Singapore"></i>
         </div>
         <p>© 2026 JordanBaby.com - Care Center</p>
     </footer>
 
-    <!-- WhatsApp 悬浮组件区 -->
+    <!-- WhatsApp 高端跳闪悬浮组件区 -->
     <div class="whatsapp-widget">
         <!-- 弹出的提示框 -->
         <div class="wa-popup" id="wa-popup">
@@ -146,7 +147,7 @@
                     <p dir="rtl" class="ar-text highlight-offer">🎁 عرض حصري: احصل على خصم (VIP) خاص عند الاستشارة قبل 31 ديسمبر 2026!</p>
                     <p class="en-text highlight-offer">🎁 Exclusive Offer: Enjoy a VIP discount for inquiries made before Dec 31, 2026!</p>
                 </div>
-                <!-- 这里的号码已经设置为您的 +962781511811 -->
+                
                 <a href="https://wa.me/962781511811" target="_blank" class="wa-chat-btn">
                     تواصل عبر واتساب | Chat on WhatsApp
                 </a>
