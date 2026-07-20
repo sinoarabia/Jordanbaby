@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JordanBaby - 约旦顶级母婴护理</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 顶部：域名与宣传语 -->
+    <header class="header">
+        <h1 class="logo">JordanBaby.com</h1>
+        <div class="slogan-container">
+            <p class="slogan ar" dir="rtl">رعاية خبراء للأطفال، لعب إبداعي وملاذ للأمهات – نختار أول منزل لنا في عمان! صوتوا لموقعنا المفضل.</p>
+            <p class="slogan en">Expert Baby Care, Creative Play & Mom's Sanctuary – We're Choosing Our First Amman Home! Vote for Your Favorite Location.</p>
+        </div>
+    </header>
+
+    <!-- 核心展示图 -->
+    <section class="hero">
+        <img src="12111.jpg" alt="JordanBaby Care Center Interior" class="main-image">
+    </section>
+
+    <!-- 服务内容展示区 -->
+    <section class="services">
+        <!-- 宝宝护理板块 -->
+        <div class="service-card">
+            <h2>🍼 宝宝专业护理</h2>
+            <p class="subtitle">Baby Care / العناية بالطفل</p>
+            <ul>
+                <li>🛁 专业洗澡 (Bathing)</li>
+                <li>✂️ 安全剪指甲 (Nail Clipping)</li>
+                <li>🧴 抹油按摩皮肤 (Oil Massage)</li>
+                <li>💨 婴儿排气操 (Gas Relief Exercises)</li>
+            </ul>
+        </div>
+
+        <!-- 儿童娱乐室板块 -->
+        <div class="service-card highlight">
+            <h2>🧸 3-7岁儿童娱乐室</h2>
+            <p class="subtitle">购买服务后免费享用</p>
+            <ul>
+                <li>🧩 智能拼图 (Smart Puzzles)</li>
+                <li>🇨🇳 中文老师交流互动 (Chinese Teacher)</li>
+                <li>🏎️ 遥控玩具车 (RC Cars)</li>
+                <li>🎮 智能游戏机 (Smart Consoles)</li>
+            </ul>
+        </div>
+
+        <!-- 宝妈休闲室板块 -->
+        <div class="service-card">
+            <h2>☕ 宝妈专属休闲室</h2>
+            <p class="subtitle">Mom's Sanctuary / ملاذ الأمهات</p>
+            <ul>
+                <li>🎤 唱歌跳舞放松 (Singing & Dancing)</li>
+                <li>🍹 提供平价优质饮品 (Affordable Drinks)</li>
+                <li>🛋️ 舒适的私密社交空间</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 投票互动区 -->
+    <section class="voting-section">
+        <div class="voting-header">
+            <h2>📍 票选我们的首家店址</h2>
+            <p>Vote for our first location in Amman! / !صوتوا لموقعنا الأول في عمان</p>
+        </div>
+        
+        <div id="voting-grid" class="voting-grid">
+            <!-- 投票选项将由 JavaScript 动态生成填入这里 -->
+        </div>
+        
+        <p id="thank-you-msg" class="hidden-msg">🎉 感谢您的投票！Thank you for voting! شكراً لتصويتكم!</p>
+    </section>
+
+    <footer>
+        <p>© 2026 JordanBaby.com - Connecting China & Jordan with Love.</p>
+    </footer>
+
+    <!-- 引入交互逻辑 -->
+    <script src="script.js"></script>
+</body>
+</html>/* 全局重置与基础设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fcf9f2; /* 温暖的米白色背景 */
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+/* 头部样式 */
+.header {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: #c98a5c; /* 温暖的棕木色 */
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.slogan-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.slogan {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.slogan.ar {
+    font-size: 1.3rem; /* 阿拉伯语通常需要稍微大一点的字号 */
+    color: #2c3e50;
+}
+
+.slogan.en {
+    color: #7f8c8d;
+}
+
+/* 核心主图样式 */
+.hero {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.main-image {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    display: block;
+}
+
+/* 服务卡片布局 */
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.service-card {
+    background: #ffffff;
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    border-top: 4px solid #e0c3a8;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-card.highlight {
+    border-top: 4px solid #e74c3c; /* 强调儿童免费区 */
+    background: #fffdfa;
+}
+
+.service-card h2 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.service-card .subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.service-card ul {
+    list-style: none;
+}
+
+.service-card ul li {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+}
+
+/* 投票区样式 */
+.voting-section {
+    background-color: #f4eee6;
+    padding: 50px 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.voting-header {
+    margin-bottom: 30px;
+}
+
+.voting-header h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+.voting-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.vote-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vote-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.vote-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.vote-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    height: 15px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.vote-bar {
+    height: 100%;
+    background-color: #c98a5c;
+    width: 0%; /* JS会控制这个宽度 */
+    transition: width 1s ease-in-out;
+}
+
+.vote-btn {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.vote-btn:hover {
+    background-color: #1a252f;
+}
+
+.vote-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.hidden-msg {
+    display: none;
+    color: #27ae60;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9rem;
+}// 安曼店址选项配置及初始模拟票数
+const locations = [
+    { id: 'abdoun', name: 'Abdoun', nameAr: 'عبدون', initialVotes: 342 },
+    { id: 'sweifieh', name: 'Al-Sweifieh', nameAr: 'الصويفية', initialVotes: 215 },
+    { id: 'dabouq', name: 'Dabouq', nameAr: 'دابوق', initialVotes: 480 },
+    { id: 'tlaalali', name: "Tla' Al-Ali", nameAr: 'تلاع العلي', initialVotes: 189 }
+];
+
+const gridContainer = document.getElementById('voting-grid');
+const thankYouMsg = document.getElementById('thank-you-msg');
+
+// 计算总票数，用于显示比例条
+function getTotalVotes() {
+    return locations.reduce((total, loc) => {
+        const savedVotes = parseInt(localStorage.getItem(`votes_${loc.id}`)) || loc.initialVotes;
+        return total + savedVotes;
+    }, 0);
+}
+
+// 渲染投票卡片
+function renderVotingCards() {
+    gridContainer.innerHTML = ''; // 清空容器
+    const totalVotes = getTotalVotes();
+    const hasVoted = localStorage.getItem('jordanbaby_has_voted') === 'true';
+
+    locations.forEach(loc => {
+        // 获取本地存储的票数，如果没有则使用初始票数
+        const currentVotes = parseInt(localStorage.getItem(`votes_${loc.id}`)) || loc.initialVotes;
+        const percentage = totalVotes === 0 ? 0 : Math.round((currentVotes / totalVotes) * 100);
+
+        const card = document.createElement('div');
+        card.className = 'vote-card';
+
+        card.innerHTML = `
+            <h3>${loc.name}</h3>
+            <p dir="rtl">${loc.nameAr}</p>
+            <div class="vote-bar-container">
+                <div class="vote-bar" style="width: ${percentage}%"></div>
+            </div>
+            <p>${currentVotes} 票 (${percentage}%)</p>
+            <button class="vote-btn" onclick="submitVote('${loc.id}')" ${hasVoted ? 'disabled' : ''}>
+                ${hasVoted ? '已投票 Voted' : '投票 Vote / تصويت'}
+            </button>
+        `;
+        gridContainer.appendChild(card);
+    });
+
+    if (hasVoted) {
+        thankYouMsg.style.display = 'block';
+    }
+}
+
+// 处理投票点击事件
+function submitVote(locationId) {
+    // 检查是否已经投过票
+    if (localStorage.getItem('jordanbaby_has_voted') === 'true') {
+        alert("您已经投过票了！You have already voted!");
+        return;
+    }
+
+    // 找到被投票的地点并增加票数
+    const location = locations.find(l => l.id === locationId);
+    let currentVotes = parseInt(localStorage.getItem(`votes_${location.id}`)) || location.initialVotes;
+    currentVotes++;
+    
+    // 更新本地存储
+    localStorage.setItem(`votes_${location.id}`, currentVotes);
+    localStorage.setItem('jordanbaby_has_voted', 'true');
+
+    // 重新渲染UI
+    renderVotingCards();
+}
+
+// 页面加载完成后执行渲染
+document.addEventListener('DOMContentLoaded', renderVotingCards);
