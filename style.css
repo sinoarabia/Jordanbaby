@@ -116,25 +116,43 @@ body {
     text-align: center;
 }
 
+/* 修复中间卡片的副标题割裂问题 */
 .subtitle-group {
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 让双语副标题居中紧凑 */
 }
-.subtitle-group .ar-sub { border-bottom: none; margin-bottom: 2px; padding-bottom: 0; color:#555; font-weight: bold;}
-.subtitle-group .en-sub { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.subtitle-group .ar-sub { 
+    border-bottom: none; 
+    margin-bottom: 2px; 
+    padding-bottom: 0; 
+    color:#555; 
+    font-weight: bold;
+}
+
+.subtitle-group .en-sub { 
+    border-bottom: none; 
+    margin-bottom: 0; 
+    padding-bottom: 0; 
+}
 
 .service-card ul {
     list-style: none;
     padding: 0;
 }
 
-/* 上面阿拉伯语，下面英语的专属排版 */
+/* --- 核心修复：上阿下英的专属排版 --- */
 .bilingual-item {
     margin-bottom: 18px;
     padding-bottom: 10px;
     border-bottom: 1px dashed #f0e6da;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* 重点修复：让中英文都统一靠右对齐，符合阿拉伯语习惯 */
 }
 
 .bilingual-item:last-child {
@@ -146,12 +164,14 @@ body {
     color: #2c3e50;
     font-weight: 600;
     margin-bottom: 4px;
+    text-align: right;
 }
 
 .en-text {
     font-size: 0.9rem;
     color: #7f8c8d;
-    padding-left: 28px; /* 给英文缩进，对齐阿拉伯语前面的Emoji */
+    text-align: right; /* 文本靠右 */
+    direction: ltr; /* 但保证英文是从左向右正常拼写 */
 }
 
 /* 投票区样式 */
