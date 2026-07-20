@@ -116,7 +116,6 @@ body {
     text-align: center;
 }
 
-/* 修复中间卡片的副标题割裂问题 */
 .subtitle-group {
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
@@ -145,14 +144,13 @@ body {
     padding: 0;
 }
 
-/* --- 核心修复：统一居中对齐，解决割裂感 --- */
 .bilingual-item {
     margin-bottom: 18px;
     padding-bottom: 10px;
     border-bottom: 1px dashed #f0e6da;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 将左右两极分化的布局改为统一居中对齐 */
+    align-items: center; 
     text-align: center;
 }
 
@@ -264,11 +262,165 @@ body {
     line-height: 1.5;
 }
 
-/* 页脚 */
 footer {
     text-align: center;
     padding: 20px;
     background-color: #333;
     color: #fff;
     font-size: 0.9rem;
+}
+
+/* =========================================
+   WhatsApp 悬浮组件专属样式 (高端大气版)
+   ========================================= */
+
+.whatsapp-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px; /* 如果你想放左边，把right改成left */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* 跳闪动画的图标 */
+.wa-icon {
+    background-color: #25D366;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    animation: pulse-bounce 2s infinite; /* 跳跳闪闪动画 */
+    transition: transform 0.3s ease;
+}
+
+.wa-icon:hover {
+    transform: scale(1.1);
+}
+
+/* 动画定义：上下跳动 + 光圈呼吸闪烁 */
+@keyframes pulse-bounce {
+    0% { transform: scale(1) translateY(0); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    50% { transform: scale(1.05) translateY(-10px); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { transform: scale(1) translateY(0); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* 提示框主体 */
+.wa-popup {
+    display: none; /* 默认隐藏 */
+    width: 320px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #f0e6da;
+    transform-origin: bottom right;
+    animation: slide-up 0.3s ease-out forwards;
+}
+
+.wa-popup.show {
+    display: block;
+}
+
+@keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 提示框头部（香槟金渐变，显高端） */
+.wa-popup-header {
+    background: linear-gradient(135deg, #c98a5c, #b07548);
+    color: white;
+    padding: 18px 20px;
+    position: relative;
+    text-align: center;
+}
+
+.wa-popup-header h4 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.wa-popup-header .en-title {
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+.wa-popup-close {
+    position: absolute;
+    top: 10px;
+    left: 15px; /* 约旦习惯文本靠右，关闭按钮放左侧更合理 */
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: rgba(255,255,255,0.8);
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.wa-popup-close:hover {
+    color: white;
+}
+
+/* 提示框内容区 */
+.wa-popup-body {
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.wa-popup-body .ar-text {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.wa-popup-body .en-text {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+/* 专属优惠提示框 */
+.wa-offer {
+    background: #fdfbf7;
+    border: 1.5px dashed #c98a5c;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.wa-offer .highlight-offer {
+    color: #d35400; /* 高级橘红色，强调优惠 */
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+}
+
+.wa-offer .en-text.highlight-offer {
+    margin-bottom: 0;
+    font-size: 0.85rem;
+}
+
+/* WhatsApp 联系大按钮 */
+.wa-chat-btn {
+    display: block;
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.05rem;
+    transition: background 0.3s, transform 0.3s;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+}
+
+.wa-chat-btn:hover {
+    background-color: #1ebe57;
+    transform: translateY(-2px);
 }
