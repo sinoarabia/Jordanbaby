@@ -271,20 +271,19 @@ footer {
 }
 
 /* =========================================
-   WhatsApp 悬浮组件专属样式 (高端大气版)
+   WhatsApp 悬浮组件核心样式 (请确保这段代码在文件最下方)
    ========================================= */
 
 .whatsapp-widget {
     position: fixed;
     bottom: 30px;
-    right: 30px; /* 如果你想放左边，把right改成left */
-    z-index: 1000;
+    right: 30px; 
+    z-index: 9999; /* 确保悬浮在所有元素最上面 */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-/* 跳闪动画的图标 */
 .wa-icon {
     background-color: #25D366;
     width: 65px;
@@ -295,37 +294,35 @@ footer {
     align-items: center;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-    animation: pulse-bounce 2s infinite; /* 跳跳闪闪动画 */
+    animation: pulse-bounce 2s infinite; 
     transition: transform 0.3s ease;
+    margin-top: 15px;
 }
 
 .wa-icon:hover {
     transform: scale(1.1);
 }
 
-/* 动画定义：上下跳动 + 光圈呼吸闪烁 */
 @keyframes pulse-bounce {
     0% { transform: scale(1) translateY(0); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
     50% { transform: scale(1.05) translateY(-10px); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
     100% { transform: scale(1) translateY(0); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
-/* 提示框主体 */
 .wa-popup {
-    display: none; /* 默认隐藏 */
+    display: none; /* 默认隐藏，必须靠这里的 display:none 控制 */
     width: 320px;
     background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
     overflow: hidden;
     border: 1px solid #f0e6da;
     transform-origin: bottom right;
-    animation: slide-up 0.3s ease-out forwards;
 }
 
 .wa-popup.show {
     display: block;
+    animation: slide-up 0.3s ease-out forwards;
 }
 
 @keyframes slide-up {
@@ -333,7 +330,6 @@ footer {
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* 提示框头部（香槟金渐变，显高端） */
 .wa-popup-header {
     background: linear-gradient(135deg, #c98a5c, #b07548);
     color: white;
@@ -345,18 +341,20 @@ footer {
 .wa-popup-header h4 {
     margin: 0;
     font-size: 1.3rem;
+    color: white;
 }
 
 .wa-popup-header .en-title {
     font-size: 0.95rem;
     font-weight: 400;
     opacity: 0.9;
+    color: white;
 }
 
 .wa-popup-close {
     position: absolute;
     top: 10px;
-    left: 15px; /* 约旦习惯文本靠右，关闭按钮放左侧更合理 */
+    left: 15px; 
     font-size: 1.8rem;
     cursor: pointer;
     color: rgba(255,255,255,0.8);
@@ -368,7 +366,6 @@ footer {
     color: white;
 }
 
-/* 提示框内容区 */
 .wa-popup-body {
     padding: 25px 20px;
     text-align: center;
@@ -386,7 +383,6 @@ footer {
     margin-bottom: 15px;
 }
 
-/* 专属优惠提示框 */
 .wa-offer {
     background: #fdfbf7;
     border: 1.5px dashed #c98a5c;
@@ -396,7 +392,7 @@ footer {
 }
 
 .wa-offer .highlight-offer {
-    color: #d35400; /* 高级橘红色，强调优惠 */
+    color: #d35400; 
     margin-bottom: 8px;
     font-size: 1.05rem;
 }
@@ -406,7 +402,6 @@ footer {
     font-size: 0.85rem;
 }
 
-/* WhatsApp 联系大按钮 */
 .wa-chat-btn {
     display: block;
     background-color: #25D366;
@@ -423,4 +418,5 @@ footer {
 .wa-chat-btn:hover {
     background-color: #1ebe57;
     transform: translateY(-2px);
+    color: white;
 }
