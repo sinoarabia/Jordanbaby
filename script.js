@@ -1,4 +1,4 @@
-// 安曼 6 个黄金店址选项配置（初始票数设定为等额，确保初始显示约为 16.6%）
+// 安曼 6 个黄金店址选项配置
 const locations = [
     { id: 'abdoun', name: 'Abdoun', nameAr: 'عبدون', initialVotes: 100 },
     { id: 'dabouq', name: 'Dabouq', nameAr: 'دابوق', initialVotes: 100 },
@@ -11,6 +11,7 @@ const locations = [
 const gridContainer = document.getElementById('voting-grid');
 const thankYouMsg = document.getElementById('thank-you-msg');
 
+// 计算真实总票数
 function getTotalVotes() {
     return locations.reduce((total, loc) => {
         const savedVotes = parseInt(localStorage.getItem(`jordanbaby_votes_${loc.id}`)) || loc.initialVotes;
@@ -18,6 +19,7 @@ function getTotalVotes() {
     }, 0);
 }
 
+// 渲染投票卡片
 function renderVotingCards() {
     gridContainer.innerHTML = ''; 
     const totalVotes = getTotalVotes();
@@ -56,6 +58,7 @@ function renderVotingCards() {
     }
 }
 
+// 处理投票点击
 function submitVote(locationId) {
     if (localStorage.getItem('jordanbaby_has_voted') === 'true') {
         alert("You have already voted! !لقد قمت بالتصويت بالفعل");
@@ -72,10 +75,11 @@ function submitVote(locationId) {
     renderVotingCards();
 }
 
-// === 新增：控制 WhatsApp 弹窗显示的函数 ===
+// 控制 WhatsApp 弹窗显示/隐藏
 function toggleWaPopup() {
     const popup = document.getElementById('wa-popup');
     popup.classList.toggle('show');
 }
 
+// 页面加载完成后渲染
 document.addEventListener('DOMContentLoaded', renderVotingCards);
