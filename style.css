@@ -12,7 +12,7 @@ body {
     background-color: #fcf9f2; 
     color: #4a4a4a;
     line-height: 1.6;
-    overflow-x: hidden; /* 防止横向滚动条出现 */
+    overflow-x: hidden; 
 }
 
 /* =========================================
@@ -95,7 +95,7 @@ body {
 .service-card {
     background: #ffffff;
     flex: 1;
-    min-width: 300px; /* 适配小屏手机 */
+    min-width: 300px; 
     padding: 30px 20px; 
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
@@ -117,6 +117,7 @@ body {
     color: #333;
     margin-bottom: 5px;
     text-align: center;
+    direction: rtl; /* 保证标题栏文字在左，Emoji在最右 */
 }
 
 .service-card .subtitle {
@@ -156,6 +157,9 @@ body {
     padding: 0;
 }
 
+/* =========================================
+   阿拉伯双语列表核心优化 (Emoji强制定右侧)
+   ========================================= */
 .bilingual-item {
     margin-bottom: 15px;
     padding-bottom: 10px;
@@ -176,6 +180,13 @@ body {
     color: #2c3e50;
     font-weight: 600;
     margin-bottom: 4px;
+    
+    /* 核心修复：强制在一行内从右向左排列，锁定Emoji在右边 */
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 6px; 
+    direction: rtl; 
 }
 
 .en-text {
@@ -373,7 +384,6 @@ footer p {
     transform-origin: bottom right;
 }
 
-/* 屏幕极小时适配 */
 @media (max-width: 350px) {
     .wa-popup { width: 280px; }
 }
@@ -429,14 +439,14 @@ footer p {
     text-align: center;
 }
 
-.wa-popup-body .ar-text {
+.wa-popup-body .ar-text-wa {
     font-weight: 600;
     color: #2c3e50;
     margin-bottom: 5px;
     font-size: 1.05rem;
 }
 
-.wa-popup-body .en-text {
+.wa-popup-body .en-text-wa {
     font-size: 0.85rem;
     color: #7f8c8d;
     margin-bottom: 12px;
@@ -456,7 +466,7 @@ footer p {
     font-size: 0.95rem;
 }
 
-.wa-offer .en-text.highlight-offer {
+.wa-offer .en-text-wa.highlight-offer {
     margin-bottom: 0;
     font-size: 0.8rem;
 }
