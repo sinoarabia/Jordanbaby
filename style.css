@@ -1,0 +1,215 @@
+/* 全局重置与基础设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #fcf9f2; /* 温暖的米白色背景 */
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+/* 头部样式 */
+.header {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: #c98a5c; /* 温暖的棕木色 */
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.slogan-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.slogan {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.slogan.ar {
+    font-size: 1.3rem; /* 阿拉伯语通常需要稍微大一点的字号 */
+    color: #2c3e50;
+}
+
+.slogan.en {
+    color: #7f8c8d;
+}
+
+/* 核心主图样式 */
+.hero {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.main-image {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    display: block;
+}
+
+/* 服务卡片布局 */
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.service-card {
+    background: #ffffff;
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    border-top: 4px solid #e0c3a8;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-card.highlight {
+    border-top: 4px solid #e74c3c; /* 强调儿童免费区 */
+    background: #fffdfa;
+}
+
+.service-card h2 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.service-card .subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.service-card ul {
+    list-style: none;
+}
+
+.service-card ul li {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+}
+
+/* 投票区样式 */
+.voting-section {
+    background-color: #f4eee6;
+    padding: 50px 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.voting-header {
+    margin-bottom: 30px;
+}
+
+.voting-header h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+.voting-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.vote-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vote-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.vote-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.vote-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    height: 15px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.vote-bar {
+    height: 100%;
+    background-color: #c98a5c;
+    width: 0%; /* JS会控制这个宽度 */
+    transition: width 1s ease-in-out;
+}
+
+.vote-btn {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.vote-btn:hover {
+    background-color: #1a252f;
+}
+
+.vote-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.hidden-msg {
+    display: none;
+    color: #27ae60;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9rem;
+}
