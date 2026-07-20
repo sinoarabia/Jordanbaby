@@ -23,9 +23,8 @@
         <img src="12111.jpg" alt="Jordan Baby Care Center Interior" class="main-image">
     </section>
 
-    <!-- 服务内容展示区 (彻底移除中文，采用上阿下英格式) -->
+    <!-- 服务内容展示区 -->
     <section class="services">
-        
         <!-- 宝宝护理板块 -->
         <div class="service-card">
             <h2 dir="rtl">🍼 العناية الاحترافية بالطفل</h2>
@@ -106,7 +105,7 @@
         </div>
         
         <div id="voting-grid" class="voting-grid">
-            <!-- 投票选项将由 JavaScript 动态生成填入这里 -->
+            <!-- 投票选项由 JavaScript 动态生成 -->
         </div>
         
         <p id="thank-you-msg" class="hidden-msg">🎉 !شكراً لتصويتكم<br>Thank you for voting!</p>
@@ -115,6 +114,38 @@
     <footer>
         <p>© 2026 JordanBaby.com - Care Center</p>
     </footer>
+
+    <!-- WhatsApp 悬浮组件区 -->
+    <div class="whatsapp-widget">
+        <!-- 弹出的提示框 -->
+        <div class="wa-popup" id="wa-popup">
+            <div class="wa-popup-header">
+                <span class="wa-popup-close" onclick="toggleWaPopup()">×</span>
+                <h4 dir="rtl">خدمة العملاء</h4>
+                <h4 class="en-title">Customer Service</h4>
+            </div>
+            <div class="wa-popup-body">
+                <p dir="rtl" class="ar-text">تواصل معنا الآن للحصول على استشارة مباشرة.</p>
+                <p class="en-text">Contact us now for real-time consultation.</p>
+                
+                <div class="wa-offer">
+                    <p dir="rtl" class="ar-text highlight-offer">🎁 عرض حصري: احصل على خصم (VIP) خاص عند الاستشارة قبل 31 ديسمبر 2026!</p>
+                    <p class="en-text highlight-offer">🎁 Exclusive Offer: Enjoy a VIP discount for inquiries made before Dec 31, 2026!</p>
+                </div>
+                <!-- 这里的号码已经设置为您的 +962781511811 -->
+                <a href="https://wa.me/962781511811" target="_blank" class="wa-chat-btn">
+                    تواصل عبر واتساب | Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+        
+        <!-- 跳闪的 WhatsApp 图标 -->
+        <div class="wa-icon" onclick="toggleWaPopup()">
+            <svg viewBox="0 0 32 32" width="38" height="38" fill="white">
+                <path d="M16 2.66c-7.36 0-13.34 5.98-13.34 13.34 0 2.35.61 4.65 1.77 6.66l-1.9 6.94 7.1-1.86c1.96 1.05 4.17 1.6 6.37 1.6 7.36 0 13.34-5.98 13.34-13.34s-5.98-13.34-13.34-13.34zm0 24.43c-1.97 0-3.92-.53-5.63-1.54l-.4-.24-4.18 1.1.11-4.08-.26-.42c-1.12-1.78-1.72-3.83-1.72-5.9 0-6.17 5.03-11.2 11.2-11.2s11.2 5.03 11.2 11.2-5.02 11.1-11.12 11.1zm6.15-8.38c-.34-.17-2-.99-2.3-1.1s-.53-.17-.75.17-.87 1.1-1.07 1.33-.4.26-.74.1-1.43-.53-2.73-1.68c-1.01-.89-1.69-2-1.9-2.33s-.02-.52.15-.69c.15-.15.34-.4.5-.6s.22-.34.34-.57.06-.42-.02-.6-.34-.82-.64-1.5c-.32-.69-.64-.6-.88-.61h-.75c-.28 0-.75.1-1.14.53s-1.5 1.47-1.5 3.58 1.54 4.15 1.75 4.43 3.02 4.61 7.32 6.46c1.02.44 1.83.71 2.45.91.99.31 1.89.27 2.6.16.8-.13 2-.82 2.28-1.61s.28-1.47.2-1.61c-.08-.15-.31-.24-.65-.41z"/>
+            </svg>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
