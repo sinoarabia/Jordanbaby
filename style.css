@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #fcf9f2; /* 温暖的米白色背景 */
+    background-color: #fcf9f2; 
     color: #4a4a4a;
     line-height: 1.6;
 }
@@ -22,9 +22,16 @@ body {
 
 .logo {
     font-size: 2.5rem;
-    color: #c98a5c; /* 温暖的棕木色 */
-    margin-bottom: 15px;
+    color: #c98a5c; 
+    margin-bottom: 5px;
     letter-spacing: 2px;
+}
+
+.sub-logo {
+    font-size: 1.6rem;
+    color: #b07548;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .slogan-container {
@@ -39,7 +46,7 @@ body {
 }
 
 .slogan.ar {
-    font-size: 1.3rem; /* 阿拉伯语通常需要稍微大一点的字号 */
+    font-size: 1.3rem; 
     color: #2c3e50;
 }
 
@@ -76,7 +83,7 @@ body {
 .service-card {
     background: #ffffff;
     flex: 1;
-    min-width: 300px;
+    min-width: 320px;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
@@ -89,7 +96,7 @@ body {
 }
 
 .service-card.highlight {
-    border-top: 4px solid #e74c3c; /* 强调儿童免费区 */
+    border-top: 4px solid #e74c3c; 
     background: #fffdfa;
 }
 
@@ -97,23 +104,54 @@ body {
     font-size: 1.4rem;
     color: #333;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .service-card .subtitle {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #888;
     margin-bottom: 20px;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
+    text-align: center;
 }
+
+.subtitle-group {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.subtitle-group .ar-sub { border-bottom: none; margin-bottom: 2px; padding-bottom: 0; color:#555; font-weight: bold;}
+.subtitle-group .en-sub { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
 .service-card ul {
     list-style: none;
+    padding: 0;
 }
 
-.service-card ul li {
-    margin-bottom: 12px;
-    font-size: 1.05rem;
+/* 上面阿拉伯语，下面英语的专属排版 */
+.bilingual-item {
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #f0e6da;
+}
+
+.bilingual-item:last-child {
+    border-bottom: none;
+}
+
+.ar-text {
+    font-size: 1.15rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.en-text {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    padding-left: 28px; /* 给英文缩进，对齐阿拉伯语前面的Emoji */
 }
 
 /* 投票区样式 */
@@ -154,6 +192,7 @@ body {
 .vote-card h3 {
     font-size: 1.5rem;
     margin-bottom: 5px;
+    color: #333;
 }
 
 .vote-card p {
@@ -173,7 +212,7 @@ body {
 .vote-bar {
     height: 100%;
     background-color: #c98a5c;
-    width: 0%; /* JS会控制这个宽度 */
+    width: 0%; 
     transition: width 1s ease-in-out;
 }
 
@@ -186,6 +225,7 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s;
+    font-weight: bold;
 }
 
 .vote-btn:hover {
@@ -203,6 +243,7 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 25px;
+    line-height: 1.5;
 }
 
 /* 页脚 */
