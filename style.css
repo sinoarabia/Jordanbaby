@@ -193,19 +193,30 @@ body {
 }
 
 /* =========================================
-   【新增】博客频道高端引流横幅 (Banner)
+   【修复】博客频道高端引流横幅 (Banner) - 终极居中版
    ========================================= */
 .blog-promo {
     padding: 45px 20px;
     background: linear-gradient(135deg, #fffdfa 0%, #f4eee6 100%);
-    margin: 10px auto 40px;
+    margin: 20px auto 40px;
     max-width: 1000px;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(201, 138, 92, 0.12);
     border: 1px solid #f0e6da;
+    
+    /* 核心修复：用 Flexbox 强制所有元素绝对居中，彻底消除 LTR/RTL 撕裂 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+}
+
+.blog-promo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .promo-icon {
@@ -219,6 +230,7 @@ body {
     color: #b07548;
     margin-bottom: 15px;
     font-weight: bold;
+    direction: rtl;
 }
 
 .promo-desc {
@@ -226,9 +238,8 @@ body {
     color: #555;
     margin-bottom: 25px;
     max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
     line-height: 1.7;
+    direction: rtl;
 }
 
 .blog-btn {
