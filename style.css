@@ -117,7 +117,7 @@ body {
     color: #333;
     margin-bottom: 5px;
     text-align: center;
-    direction: rtl; /* 保证标题栏文字在左，Emoji在最右 */
+    direction: rtl; 
 }
 
 .service-card .subtitle {
@@ -208,9 +208,16 @@ body {
     margin-bottom: 25px;
 }
 
+/* 核心修复：强制投票区标题居中且定位针在右侧 */
 .voting-header h2 {
     font-size: 1.8rem;
     color: #2c3e50;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; 
+    direction: rtl; 
+    flex-wrap: wrap; 
 }
 
 .voting-grid {
