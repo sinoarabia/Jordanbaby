@@ -158,7 +158,7 @@ body {
 }
 
 /* =========================================
-   阿拉伯双语列表核心优化 (Emoji强制定右侧)
+   阿拉伯双语列表核心优化
    ========================================= */
 .bilingual-item {
     margin-bottom: 15px;
@@ -180,8 +180,6 @@ body {
     color: #2c3e50;
     font-weight: 600;
     margin-bottom: 4px;
-    
-    /* 核心修复：强制在一行内从右向左排列，锁定Emoji在右边 */
     display: inline-flex; 
     align-items: center;
     justify-content: center;
@@ -192,6 +190,76 @@ body {
 .en-text {
     font-size: 0.85rem; 
     color: #7f8c8d;
+}
+
+/* =========================================
+   【新增】博客频道高端引流横幅 (Banner)
+   ========================================= */
+.blog-promo {
+    padding: 45px 20px;
+    background: linear-gradient(135deg, #fffdfa 0%, #f4eee6 100%);
+    margin: 10px auto 40px;
+    max-width: 1000px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(201, 138, 92, 0.12);
+    border: 1px solid #f0e6da;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    letter-spacing: 5px;
+}
+
+.blog-promo h2 {
+    font-size: 1.9rem;
+    color: #b07548;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.promo-desc {
+    font-size: 1.15rem;
+    color: #555;
+    margin-bottom: 25px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+.blog-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #c98a5c;
+    color: white;
+    padding: 14px 35px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(201, 138, 92, 0.3);
+    direction: rtl;
+}
+
+.blog-btn:hover {
+    background: #b07548;
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 25px rgba(201, 138, 92, 0.5);
+}
+
+.blog-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.blog-btn:hover svg {
+    transform: translateX(-6px); 
 }
 
 /* =========================================
@@ -208,7 +276,6 @@ body {
     margin-bottom: 25px;
 }
 
-/* 核心修复：强制投票区标题居中且定位针在右侧 */
 .voting-header h2 {
     font-size: 1.8rem;
     color: #2c3e50;
@@ -338,7 +405,7 @@ footer p {
 }
 
 /* =========================================
-   WhatsApp 悬浮组件核心样式 (完美适配手机版)
+   WhatsApp 悬浮组件核心样式
    ========================================= */
 .whatsapp-widget {
     position: fixed;
