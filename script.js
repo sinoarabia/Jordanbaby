@@ -90,7 +90,7 @@ async function submitVote(locationId) {
         console.error("后台统计连接失败，但不影响前台顾客体验", error);
     }
 
-    // 2. 更新网页前端显示（防止同一个人无限刷票）
+    // 2. 更新网页前端显示
     let currentVotes = parseInt(localStorage.getItem(`jordanbaby_votes_${location.id}`)) || location.initialVotes;
     currentVotes++;
     
