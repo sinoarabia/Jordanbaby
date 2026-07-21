@@ -25,7 +25,9 @@
 
     <!-- 引入全球高清国旗图标库，确保不受系统字体限制 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- 【关键修复】：加入 ?v=2 强制浏览器下载最新样式，不再读取旧缓存 -->
+    <link rel="stylesheet" href="style.css?v=2">
 
     <!-- ================= 追踪代码区开始 ================= -->
     <!-- Google tag (gtag.js) -->
@@ -210,6 +212,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- 【关键修复】：加入 ?v=2 强制浏览器下载最新 JS 逻辑，生成投票卡片 -->
+    <script src="script.js?v=2"></script>
 </body>
 </html>
