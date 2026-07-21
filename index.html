@@ -150,7 +150,7 @@
         </div>
     </section>
 
-    <!-- 【新增】博客频道高端引流横幅区 (修复 target=_blank) -->
+    <!-- 博客频道高端引流横幅区 -->
     <section class="blog-promo">
         <div class="blog-promo-content">
             <div class="promo-icon">✨ 📖 ✨</div>
@@ -178,7 +178,7 @@
         <p id="thank-you-msg" class="hidden-msg">🎉 شكراً لتصويتكم<br>Thank you for voting!</p>
     </section>
 
-    <!-- 页脚与高清国旗区 (新增隐私政策链接) -->
+    <!-- 页脚与高清国旗区 -->
     <footer>
         <div class="global-flags">
             <i class="fi fi-jo" title="Jordan"></i>
@@ -191,7 +191,6 @@
             <i class="fi fi-sg" title="Singapore"></i>
         </div>
         <p style="margin-bottom: 10px;">© 2026 JordanBaby.com - Care Center</p>
-        <!-- 核心合规修复：隐私政策声明 -->
         <p style="font-size: 0.85rem;"><a href="privacy.html" style="color: #a0b2c6; text-decoration: none;">Privacy Policy | سياسة الخصوصية</a></p>
     </footer>
 
@@ -213,7 +212,6 @@
                     <p class="en-text-wa highlight-offer">🎁 Exclusive Offer: Enjoy a VIP discount for inquiries made before Dec 31, 2026!</p>
                 </div>
                 
-                <!-- 核心转化修复：加入预填打招呼文本的 WhatsApp 链接 -->
                 <a href="https://wa.me/962781511811?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9%20%D8%A8%D8%A7%D9%84%D8%B7%D9%81%D9%84" target="_blank" class="wa-chat-btn">
                     تواصل عبر واتساب | Chat on WhatsApp
                 </a>
@@ -230,6 +228,7 @@
 
     <!-- 强制浏览器下载最新 JS v4 -->
     <script src="script.js?v=4"></script>
+    
     <!-- ================= 🎁 独家 VIP 领券与线索收集弹窗 ================= -->
     <div id="lead-modal" class="modal-overlay">
         <div class="modal-content" dir="rtl">
@@ -241,17 +240,17 @@
             <form id="lead-form" onsubmit="submitLeadData(event)">
                 <div class="form-group">
                     <label>الاسم الكريم (Name):</label>
-                    <input type="text" id="lead-name" required placeholder="مثال: ريم أحمد">
+                    <input type="text" id="lead-name" name="customer_name" required placeholder="مثال: ريم أحمد">
                 </div>
                 
                 <div class="form-group">
                     <label>رقم الواتساب (WhatsApp):</label>
-                    <input type="text" id="lead-phone" required placeholder="مثال: +962 7XXXXXXXX">
+                    <input type="text" id="lead-phone" name="customer_phone" required placeholder="مثال: +962 7XXXXXXXX">
                 </div>
                 
                 <div class="form-group">
                     <label>عمر الطفل (Age of Baby):</label>
-                    <select id="lead-baby-age">
+                    <select id="lead-baby-age" name="baby_age">
                         <option value="التحضير للولادة / 孕期">التحضير للولادة / 孕期 (Pregnancy)</option>
                         <option value="من 0 إلى سنة / 0-1岁">من 0 إلى سنة / 0-1岁 (0-1 Year)</option>
                         <option value="من 1 إلى 3 سنوات / 1-3岁">من 1 إلى 3 سنوات / 1-3岁 (1-3 Years)</option>
@@ -260,7 +259,7 @@
                 
                 <div class="form-group">
                     <label>المنطقة في عمان (Area):</label>
-                    <select id="lead-area">
+                    <select id="lead-area" name="customer_area">
                         <option value="Abdoun">عبدون (Abdoun)</option>
                         <option value="Dabouq">دابوق (Dabouq)</option>
                         <option value="Al-Sweifieh">الصويفية (Al-Sweifieh)</option>
