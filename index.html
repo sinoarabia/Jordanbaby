@@ -26,8 +26,8 @@
     <!-- 引入全球高清国旗图标库，确保不受系统字体限制 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     
-    <!-- 【关键修复】：加入 ?v=2 强制浏览器下载最新样式，不再读取旧缓存 -->
-    <link rel="stylesheet" href="style.css?v=2">
+    <!-- 强制浏览器下载最新样式 v3 -->
+    <link rel="stylesheet" href="style.css?v=3">
 
     <!-- ================= 追踪代码区开始 ================= -->
     <!-- Google tag (gtag.js) -->
@@ -76,7 +76,7 @@
         <img src="12111.jpg" alt="Jordan Baby Care Center Interior Amman" class="main-image">
     </section>
 
-    <!-- 服务内容展示区 (专业润色后的地道约旦阿拉伯语) -->
+    <!-- 服务内容展示区 -->
     <section class="services">
         <!-- 宝宝护理板块 -->
         <div class="service-card">
@@ -150,10 +150,23 @@
         </div>
     </section>
 
-    <!-- 投票互动区 (完全修复版) -->
+    <!-- 【新增】博客频道高端引流横幅区 -->
+    <section class="blog-promo">
+        <div class="blog-promo-content">
+            <div class="promo-icon">✨ 📖 ✨</div>
+            <h2 dir="rtl">دليل الأمومة والعناية بالطفل</h2>
+            <p dir="rtl" class="promo-desc">اكتشفي أسرار راحة طفلك! مقالات حصرية ونصائح مجانية من خبراء الرعاية في عمان حول الاستحمام، المساج، والتخلص من المغص.</p>
+            <a href="blog/index.html" class="blog-btn">
+                تصفحي المقالات الآن
+                <!-- RTL 向左指的精美箭头 -->
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 5 12 12 19"></polyline></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- 投票互动区 -->
     <section class="voting-section">
         <div class="voting-header">
-            <!-- 严谨版：去掉了多余感叹号，文字在前，Emoji在后，利用 CSS 强制右侧对齐 -->
             <h2 dir="rtl">صوتوا لاختيار موقع فرعنا الأول في عمان 📍</h2>
             <p>Vote for our first location in Amman!</p>
         </div>
@@ -212,7 +225,7 @@
         </div>
     </div>
 
-    <!-- 【关键修复】：加入 ?v=2 强制浏览器下载最新 JS 逻辑，生成投票卡片 -->
-    <script src="script.js?v=2"></script>
+    <!-- 强制浏览器下载最新 JS v3 -->
+    <script src="script.js?v=3"></script>
 </body>
 </html>
