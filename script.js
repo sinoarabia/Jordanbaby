@@ -9,7 +9,7 @@ const locations = [
 ];
 
 // 【替换这里】：换成你部署 Google Apps Script 后得到的真实 Web app URL
-const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycb...https://script.google.com/macros/s/AKfycbw1zEsshLABqNNIgdCH4MXxTFjFv_ij2bscobN3fONehZ84USByJjSYmb7ZH3BYSHxS/exec.../exec';
+const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbw1zEsshLABqNNIgdCH4MXxTFjFv_ij2bscobN3fONehZ84USByJjSYmb7ZH3BYSHxS/exec';
 
 let selectedLocationObj = null;
 const gridContainer = document.getElementById('voting-grid');
