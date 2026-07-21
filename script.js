@@ -8,13 +8,13 @@ const locations = [
     { id: 'rabieh', name: 'Al-Rabieh', nameAr: 'الرابية', initialVotes: 100 }
 ];
 
-// 你的专属 Formspree 数据接收接口
-const FORMSPREE_URL = 'https://formspree.io/f/mkodzwla';
+// 【替换这里】：换成你部署 Google Apps Script 后得到的真实 Web app URL
+const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycb...https://script.google.com/macros/s/AKfycbw1zEsshLABqNNIgdCH4MXxTFjFv_ij2bscobN3fONehZ84USByJjSYmb7ZH3BYSHxS/exec.../exec';
 
+let selectedLocationObj = null;
 const gridContainer = document.getElementById('voting-grid');
 const thankYouMsg = document.getElementById('thank-you-msg');
 
-// 计算真实总票数
 function getTotalVotes() {
     return locations.reduce((total, loc) => {
         const savedVotes = parseInt(localStorage.getItem(`jordanbaby_votes_${loc.id}`)) || loc.initialVotes;
@@ -22,7 +22,6 @@ function getTotalVotes() {
     }, 0);
 }
 
-// 渲染投票卡片
 function renderVotingCards() {
     gridContainer.innerHTML = ''; 
     const totalVotes = getTotalVotes();
@@ -49,7 +48,7 @@ function renderVotingCards() {
                 <div class="vote-bar" style="width: ${percentage}%"></div>
             </div>
             <p style="font-size: 0.95rem; color: #777;">${currentVotes} Votes (${percentage}%)</p>
-            <button class="vote-btn" onclick="submitVote('${loc.id}')" ${hasVoted ? 'disabled' : ''}>
+            <button class="vote-btn" onclick="prepareVote('${loc.id}')" ${hasVoted ? 'disabled' : ''}>
                 ${hasVoted ? 'تم التصويت / Voted' : 'تصويت / Vote'}
             </button>
         `;
@@ -61,50 +60,77 @@ function renderVotingCards() {
     }
 }
 
-// 处理投票点击（加入后台数据发送功能）
-async function submitVote(locationId) {
+// 第一步：用户点击投票，弹出线索收集表单而不是直接完成
+function prepareVote(locationId) {
     if (localStorage.getItem('jordanbaby_has_voted') === 'true') {
         alert("You have already voted! !لقد قمت بالتصويت بالفعل");
         return;
     }
+    selectedLocationObj = locations.find(l => l.id === locationId);
+    
+    // 自动将下拉框默认选中用户选中的区域
+    const areaSelect = document.getElementById('lead-area');
+    if(areaSelect) {
+        areaSelect.value = selectedLocationObj.name;
+    }
 
-    const location = locations.find(l => l.id === locationId);
+    // 显示弹窗
+    document.getElementById('lead-modal').style.display = 'flex';
+}
 
-    // 1. 核心商业逻辑：将投票结果发送到你的邮箱后台
+function closeModal() {
+    document.getElementById('lead-modal').style.display = 'none';
+}
+
+// 第二步：用户提交详细表单后，发送到 Google 表格并完成投票
+async function submitLeadData(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('lead-name').value;
+    const phone = document.getElementById('lead-phone').value;
+    const babyAge = document.getElementById('lead-baby-age').value;
+    const area = document.getElementById('lead-area').value;
+
+    // 1. 发送数据到 Google 表格
     try {
-        if(FORMSPREE_URL && !FORMSPREE_URL.includes('你的表单ID')) {
-            await fetch(FORMSPREE_URL, {
+        if(GOOGLE_API_URL && !GOOGLE_API_URL.includes('你的真实链接')) {
+            await fetch(GOOGLE_API_URL, {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    "通知说明": "🎉 收到一份新的选址投票！(Jordan Baby Care)",
-                    "顾客投票区域": location.name,
+                    "通知说明": "🎁 收到一份带详细客户画像的投票线索！",
+                    "投票区域": selectedLocationObj ? selectedLocationObj.name : area,
+                    "姓名": name,
+                    "WhatsApp": phone,
+                    "宝宝年龄段": babyAge,
+                    "居住区域": area,
                     "提交时间": new Date().toLocaleString()
                 })
             });
         }
     } catch (error) {
-        console.error("后台统计连接失败，但不影响前台顾客体验", error);
+        console.error("数据写入表格失败", error);
     }
 
-    // 2. 更新网页前端显示
-    let currentVotes = parseInt(localStorage.getItem(`jordanbaby_votes_${location.id}`)) || location.initialVotes;
-    currentVotes++;
+    // 2. 更新本地状态并刷新投票统计
+    if (selectedLocationObj) {
+        let currentVotes = parseInt(localStorage.getItem(`jordanbaby_votes_${selectedLocationObj.id}`)) || selectedLocationObj.initialVotes;
+        currentVotes++;
+        localStorage.setItem(`jordanbaby_votes_${selectedLocationObj.id}`, currentVotes);
+    }
     
-    localStorage.setItem(`jordanbaby_votes_${location.id}`, currentVotes);
     localStorage.setItem('jordanbaby_has_voted', 'true');
 
+    // 关闭弹窗并刷新页面显示
+    closeModal();
     renderVotingCards();
+    alert("شكراً لك! تم تسجيل صوتك بنجاح والحصول على خصم VIP.");
 }
 
-// 控制 WhatsApp 弹窗显示/隐藏
 function toggleWaPopup() {
     const popup = document.getElementById('wa-popup');
     popup.classList.toggle('show');
 }
 
-// 页面加载完成后渲染
 document.addEventListener('DOMContentLoaded', renderVotingCards);
