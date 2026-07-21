@@ -230,5 +230,50 @@
 
     <!-- 强制浏览器下载最新 JS v4 -->
     <script src="script.js?v=4"></script>
+    <!-- ================= 🎁 独家 VIP 领券与线索收集弹窗 ================= -->
+    <div id="lead-modal" class="modal-overlay">
+        <div class="modal-content" dir="rtl">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-header-icon">🎁</div>
+            <h2>شكراً لصوتك! احصل على خصم VIP</h2>
+            <p class="modal-subtitle">أدخلي بياناتك للحصول على خصم 50% على خدماتنا عند الافتتاح في عمان.</p>
+            
+            <form id="lead-form" onsubmit="submitLeadData(event)">
+                <div class="form-group">
+                    <label>الاسم الكريم (Name):</label>
+                    <input type="text" id="lead-name" required placeholder="مثال: ريم أحمد">
+                </div>
+                
+                <div class="form-group">
+                    <label>رقم الواتساب (WhatsApp):</label>
+                    <input type="text" id="lead-phone" required placeholder="مثال: +962 7XXXXXXXX">
+                </div>
+                
+                <div class="form-group">
+                    <label>عمر الطفل (Age of Baby):</label>
+                    <select id="lead-baby-age">
+                        <option value="التحضير للولادة / 孕期">التحضير للولادة / 孕期 (Pregnancy)</option>
+                        <option value="من 0 إلى سنة / 0-1岁">من 0 إلى سنة / 0-1岁 (0-1 Year)</option>
+                        <option value="من 1 إلى 3 سنوات / 1-3岁">من 1 إلى 3 سنوات / 1-3岁 (1-3 Years)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>المنطقة في عمان (Area):</label>
+                    <select id="lead-area">
+                        <option value="Abdoun">عبدون (Abdoun)</option>
+                        <option value="Dabouq">دابوق (Dabouq)</option>
+                        <option value="Al-Sweifieh">الصويفية (Al-Sweifieh)</option>
+                        <option value="Khalda">خلدا (Khalda)</option>
+                        <option value="Um Uthaina">أم أذينة (Um Uthaina)</option>
+                        <option value="Al-Rabieh">الرابية (Al-Rabieh)</option>
+                        <option value="Other">أخرى / Other</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-lead-btn">تأكيد والحصول على الخصم | Submit</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
