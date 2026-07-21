@@ -8,8 +8,13 @@ const locations = [
     { id: 'rabieh', name: 'Al-Rabieh', nameAr: 'الرابية', initialVotes: 100 }
 ];
 
+// 您的 Google 表格接收接口
+const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbwcYit_ecnYCue-ZsmoTTozQFaxyhBQGd5dNaqT2ysgVLPKIJir3hnrk_ZyJze09t0/exec';
+
 // 您的 WhatsApp 商业客服号码 (包含国家代码，不带加号)
 const WHATSAPP_NUMBER = '962781511811';
+
+let selectedLocationObj = null;
 
 function getTotalVotes() {
     return locations.reduce((total, loc) => {
@@ -49,10 +54,8 @@ function renderVotingCards() {
                 <div class="vote-bar" style="width: ${percentage}%"></div>
             </div>
             <p style="font-size: 0.95rem; color: #777;">${currentVotes} Votes (${percentage}%)</p>
-            
-            <!-- 按钮文案更新为：通过 WhatsApp 投票 -->
             <button class="vote-btn" onclick="prepareVote('${loc.id}')" ${hasVoted ? 'disabled' : ''}>
-                ${hasVoted ? 'تم التصويت / Voted' : 'تصويت عبر واتساب / Vote via WA'}
+                ${hasVoted ? 'تم التصويت / Voted' : 'تصويت / Vote'}
             </button>
         `;
         gridContainer.appendChild(card);
@@ -63,35 +66,96 @@ function renderVotingCards() {
     }
 }
 
-// ==========================================
-// 核心逻辑改造：直接记票并一键唤起 WhatsApp
-// ==========================================
 function prepareVote(locationId) {
     if (localStorage.getItem('jordanbaby_has_voted') === 'true') {
         alert("You have already voted! !لقد قمت بالتصويت بالفعل");
         return;
     }
+    selectedLocationObj = locations.find(l => l.id === locationId);
     
-    const selectedLocationObj = locations.find(l => l.id === locationId);
+    // 弹窗前，自动把下拉框选到客户点击的区域
+    const areaSelect = document.getElementById('lead-area');
+    if(areaSelect) {
+        areaSelect.value = selectedLocationObj.name;
+    }
 
-    // 1. 立即在网站本地更新投票数字，并打上“已投票”记号
-    let currentVotes = parseInt(localStorage.getItem(`jordanbaby_votes_${selectedLocationObj.id}`)) || selectedLocationObj.initialVotes;
-    currentVotes++;
-    localStorage.setItem(`jordanbaby_votes_${selectedLocationObj.id}`, currentVotes);
+    // 弹出信息填写表单
+    const modal = document.getElementById('lead-modal');
+    if(modal) modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('lead-modal');
+    if(modal) modal.style.display = 'none';
+}
+
+async function submitLeadData(event) {
+    event.preventDefault(); // 阻止表单默认刷新
+    
+    const submitBtn = document.querySelector('.submit-lead-btn');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = 'جاري الإرسال... / Sending...';
+    submitBtn.disabled = true;
+
+    // 获取客户在表单里填写的所有信息
+    const name = document.getElementById('lead-name').value;
+    const phone = document.getElementById('lead-phone').value;
+    const babyAge = document.getElementById('lead-baby-age').value;
+    const area = document.getElementById('lead-area').value;
+    const areaAr = selectedLocationObj ? selectedLocationObj.nameAr : area;
+
+    // ==========================================
+    // 动作一：智能组装并瞬间唤起 WhatsApp (防浏览器拦截拦截)
+    // ==========================================
+    const waMessage = `مرحباً، لقد قمت بالتصويت لفرع (${areaAr} - ${area})! 🎁\nأريد الحصول على خصم 50% (VIP).\n\n📝 بياناتي:\nالاسم (Name): ${name}\nعمر الطفل (Baby Age): ${babyAge}`;
+    
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`;
+    
+    // 立即打开 WhatsApp，这一步必须放在 fetch 前面，否则浏览器可能拦截新标签页
+    window.open(whatsappUrl, '_blank');
+
+    // ==========================================
+    // 动作二：静默发送数据到 Google 表格做双重备份
+    // ==========================================
+    const formData = new URLSearchParams();
+    formData.append("通知说明", "🎁 收到一份带详细客户画像的投票线索！");
+    formData.append("投票区域", selectedLocationObj ? selectedLocationObj.name : area);
+    formData.append("姓名", name);
+    formData.append("WhatsApp", phone);
+    formData.append("宝宝年龄段", babyAge);
+    formData.append("居住区域", area);
+    formData.append("提交时间", new Date().toLocaleString());
+
+    try {
+        if(GOOGLE_API_URL) {
+            // 让浏览器后台静默发送，不阻塞页面交互
+            fetch(GOOGLE_API_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString() 
+            }).catch(e => console.error("静默发送表格失败", e));
+        }
+    } catch (error) {
+        console.error("网络异常", error);
+    }
+
+    // ==========================================
+    // 动作三：更新本地投票进度条
+    // ==========================================
+    if (selectedLocationObj) {
+        let currentVotes = parseInt(localStorage.getItem(`jordanbaby_votes_${selectedLocationObj.id}`)) || selectedLocationObj.initialVotes;
+        currentVotes++;
+        localStorage.setItem(`jordanbaby_votes_${selectedLocationObj.id}`, currentVotes);
+    }
+    
     localStorage.setItem('jordanbaby_has_voted', 'true');
 
-    // 2. 刷新页面，让客户看到进度条瞬间上涨的爽快反馈
+    // 恢复按钮状态、关闭弹窗、刷新页面
+    submitBtn.innerHTML = originalBtnText;
+    submitBtn.disabled = false;
+    closeModal();
     renderVotingCards();
-
-    // 3. 组装给客户自动填好的 WhatsApp 消息
-    // 阿拉伯语意思是：你好，我刚刚投票给了(选择的区域)！我想领取新店开业的 50% VIP 折扣。
-    const message = `مرحباً، لقد قمت بالتصويت لفرع (${selectedLocationObj.nameAr} - ${selectedLocationObj.name})! 🎁\nأريد الحصول على خصم 50% (VIP) عند الافتتاح.`;
-
-    // 4. 生成官方安全的跳转链接并直接拉起 WhatsApp
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    
-    // 打开 WhatsApp 聊天界面
-    window.open(whatsappUrl, '_blank');
 }
 
 function toggleWaPopup() {
