@@ -9,7 +9,7 @@ const locations = [
 ];
 
 // 使用您最新提供的真实 Web app URL
-const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbwcYit_ecnYCue-ZsmoTTozQFaxyhBQGd5dNaqT2ysgVLPKIJir3hnrk_ZyJze09t0/exec';
+const GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbxeelnQQeCvsOPapmteTxrbDiQRgOofoF01tW04lEy2-ROysz65clH_WpEBfKnUPbcu/exec';
 
 let selectedLocationObj = null;
 
