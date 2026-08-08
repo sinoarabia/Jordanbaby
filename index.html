@@ -57,7 +57,26 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
     <!-- ================= 追踪代码区结束 ================= -->
-
+    
+    <style>
+        /* 补充一点投票区域的基础样式 */
+        .vote-card {
+            background: #fff; padding: 20px; border-radius: 10px; text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #eee;
+        }
+        .progress-bar-container {
+            width: 100%; background: #e0e0e0; border-radius: 5px; height: 10px; margin: 15px 0; overflow: hidden;
+        }
+        .progress-bar {
+            background: #c3845c; height: 100%; transition: width 0.5s ease;
+        }
+        .vote-btn {
+            background: #2b3d4f; color: #fff; border: none; padding: 10px 20px; border-radius: 20px;
+            cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px;
+        }
+        .vote-btn:disabled { background: #888; cursor: not-allowed; }
+        .hidden-msg { display: none; color: #2ecc71; font-weight: bold; text-align: center; margin-top: 20px;}
+    </style>
 </head>
 <body>
 
@@ -225,54 +244,161 @@
             </svg>
         </div>
     </div>
-
-    <!-- 强制浏览器下载最新 JS v4 -->
-    <script src="script.js?v=4"></script>
     
+    <!-- 强制浏览器下载最新 JS v4 (保留您的原有JS) -->
+    <script src="script.js?v=4"></script>
+
     <!-- ================= 🎁 独家 VIP 领券与线索收集弹窗 ================= -->
-    <div id="lead-modal" class="modal-overlay">
-        <div class="modal-content" dir="rtl">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div class="modal-header-icon">🎁</div>
-            <h2>شكراً لصوتك! احصل على خصم VIP</h2>
-            <p class="modal-subtitle">أدخلي بياناتك للحصول على خصم 50% على خدماتنا عند الافتتاح في عمان.</p>
+    <div id="lead-modal" class="modal-overlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 999; justify-content: center; align-items: center;">
+        <div class="modal-content" dir="rtl" style="background: #fff; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; position: relative;">
+            <span class="modal-close" onclick="closeModal()" style="position: absolute; top: 15px; left: 20px; font-size: 24px; cursor: pointer; color:#333;">&times;</span>
+            <div style="text-align: center; font-size: 40px;">🎁</div>
+            <h2 style="text-align: center; margin-bottom: 10px; color:#333;">شكراً لصوتك! احصل على خصم VIP</h2>
+            <p style="text-align: center; font-size: 14px; color: #666; margin-bottom: 20px;">أدخلي بياناتك للحصول على خصم 50% على خدماتنا عند الافتتاح في عمان.</p>
             
-            <form id="lead-form" onsubmit="submitLeadData(event)">
-                <div class="form-group">
-                    <label>الاسم الكريم (Name):</label>
-                    <input type="text" id="lead-name" name="customer_name" required placeholder="مثال: ريم أحمد">
+            <form id="lead-form" action="https://formsubmit.co/sinoarabiaofficial@gmail.com" method="POST" onsubmit="submitLeadData(event)">
+                
+                <!-- 禁用 FormSubmit 的机器人验证码，提升客户体验 -->
+                <input type="hidden" name="_captcha" value="false">
+                
+                <!-- 隐藏字段：用来默默记录用户刚才投了哪个区 -->
+                <input type="hidden" id="voted_location" name="Voted_For_Location" value="">
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 14px; font-weight: bold; color:#333;">الاسم الكريم (Name):</label>
+                    <input type="text" name="Customer_Name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; color:#333; box-sizing: border-box;" placeholder="مثال: ريم أحمد">
                 </div>
                 
-                <div class="form-group">
-                    <label>رقم الواتساب (WhatsApp):</label>
-                    <input type="text" id="lead-phone" name="customer_phone" required placeholder="مثال: +962 7XXXXXXXX">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 14px; font-weight: bold; color:#333;">رقم الواتساب (WhatsApp):</label>
+                    <input type="tel" name="WhatsApp_Number" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; color:#333; box-sizing: border-box;" placeholder="مثال: +962 7XXXXXXXX">
                 </div>
                 
-                <div class="form-group">
-                    <label>عمر الطفل (Age of Baby):</label>
-                    <select id="lead-baby-age" name="baby_age">
-                        <option value="التحضير للولادة / 孕期">التحضير للولادة / 孕期 (Pregnancy)</option>
-                        <option value="من 0 إلى سنة / 0-1岁">من 0 إلى سنة / 0-1岁 (0-1 Year)</option>
-                        <option value="من 1 إلى 3 سنوات / 1-3岁">من 1 إلى 3 سنوات / 1-3岁 (1-3 Years)</option>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 14px; font-weight: bold; color:#333;">عمر الطفل (Age of Baby):</label>
+                    <select name="Baby_Age" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; color:#333; box-sizing: border-box;">
+                        <option value="التحضير للولادة / Pregnancy">التحضير للولادة / Pregnancy</option>
+                        <option value="من 0 إلى سنة / 0-1 Year">من 0 إلى سنة / 0-1 Year</option>
+                        <option value="من 1 إلى 3 سنوات / 1-3 Years">من 1 إلى 3 سنوات / 1-3 Years</option>
                     </select>
                 </div>
                 
-                <div class="form-group">
-                    <label>المنطقة في عمان (Area):</label>
-                    <select id="lead-area" name="customer_area">
-                        <option value="Abdoun">عبدون (Abdoun)</option>
-                        <option value="Dabouq">دابوق (Dabouq)</option>
-                        <option value="Al-Sweifieh">الصويفية (Al-Sweifieh)</option>
-                        <option value="Khalda">خلدا (Khalda)</option>
-                        <option value="Um Uthaina">أم أذينة (Um Uthaina)</option>
-                        <option value="Al-Rabieh">الرابية (Al-Rabieh)</option>
-                        <option value="Other">أخرى / Other</option>
-                    </select>
-                </div>
-                
-                <button type="submit" class="submit-lead-btn">تأكيد والحصول على الخصم | Submit</button>
+                <button type="submit" id="submitBtn" style="width: 100%; background: #c3845c; color: white; border: none; padding: 12px; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer;">
+                    تأكيد والحصول على الخصم | Submit
+                </button>
             </form>
         </div>
     </div>
+
+    <!-- ================= 前端核心逻辑 (无需服务器) ================= -->
+    <script>
+        // 1. 模拟的营销投票数据（显示高人气）
+        const locations = [
+            { id: "abdoun", en: "Abdoun", ar: "عبدون", percent: 85 },
+            { id: "dabouq", en: "Dabouq", ar: "دابوق", percent: 92 },
+            { id: "sweifieh", en: "Al-Sweifieh", ar: "الصويفية", percent: 65 },
+            { id: "khalda", en: "Khalda", ar: "خلدا", percent: 78 },
+            { id: "um_uthaina", en: "Um Uthaina", ar: "أم أذينة", percent: 60 },
+            { id: "rabieh", en: "Al-Rabieh", ar: "الرابية", percent: 70 }
+        ];
+
+        // 2. 动态渲染投票格子
+        function renderVotingGrid() {
+            const grid = document.getElementById("voting-grid");
+            const hasVoted = localStorage.getItem('hasVoted') === 'true'; // 检查是否投过票
+            
+            let html = "";
+            locations.forEach(loc => {
+                // 如果已经投过票，按钮变灰且不可点击
+                const btnState = hasVoted ? 'disabled' : '';
+                const btnText = hasVoted ? 'تم التصويت / Voted' : 'تصويت / Vote';
+                
+                html += `
+                <div class="vote-card">
+                    <h3 style="color:#333; margin:0 0 5px 0;">${loc.en}</h3>
+                    <h4 style="color:#333; margin:0 0 10px 0;">${loc.ar}</h4>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${loc.percent}%"></div>
+                    </div>
+                    <p style="font-size: 12px; color: #888; margin:0;">${loc.percent}% (Trending)</p>
+                    <button class="vote-btn" onclick="openLeadModal('${loc.en} / ${loc.ar}')" ${btnState}>
+                        ${btnText}
+                    </button>
+                </div>
+                `;
+            });
+            grid.innerHTML = html;
+
+            // 如果已投票，显示感谢横幅
+            if(hasVoted) {
+                document.getElementById('thank-you-msg').style.display = 'block';
+            }
+        }
+
+        // 3. 点击投票按钮 -> 记录选了哪个区 -> 弹出收集表单
+        function openLeadModal(locationName) {
+            // 把选中的地区悄悄塞入表单隐藏字段中
+            document.getElementById('voted_location').value = locationName;
+            
+            // 显示弹窗
+            document.getElementById('lead-modal').style.display = 'flex';
+        }
+
+        // 关闭弹窗
+        function closeModal() {
+            document.getElementById('lead-modal').style.display = 'none';
+        }
+
+        // 需要控制 WhatsApp 弹窗的逻辑（保留您原有的）
+        function toggleWaPopup() {
+            const popup = document.getElementById('wa-popup');
+            if (popup) {
+                popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+
+        // 4. 接管表单提交：发送到邮箱，不刷新页面
+        function submitLeadData(event) {
+            event.preventDefault(); // 阻止网页默认跳转
+            
+            const form = event.target;
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "جاري الإرسال... Sending...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+
+            // 发送数据到 FormSubmit 接口
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    // 发送成功！
+                    alert("🎉 تم التسجيل بنجاح! سيتم إرسال الخصم إلى رقم الواتساب الخاص بك.\nSuccess! Your discount will be sent via WhatsApp.");
+                    
+                    // 永久记录该用户已投票
+                    localStorage.setItem('hasVoted', 'true');
+                    
+                    closeModal();
+                    renderVotingGrid(); // 刷新投票界面（按钮全变灰）
+                } else {
+                    alert("عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.\nError. Please try again.");
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }
+            }).catch(error => {
+                alert("Network Error.");
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+        }
+
+        // 网页加载完成后执行
+        document.addEventListener("DOMContentLoaded", renderVotingGrid);
+    </script>
 </body>
 </html>
