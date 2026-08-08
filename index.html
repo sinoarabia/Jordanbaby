@@ -26,10 +26,10 @@
     <!-- 引入全球高清国旗图标库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"/>
     
-    <!-- 强制浏览器下载最新样式 v4 -->
+    <!-- 你的外部样式表 -->
     <link rel="stylesheet" href="style.css?v=4">
 
-    <!-- ================= 追踪代码区开始 ================= -->
+    <!-- ================= 追踪代码区 ================= -->
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HRCN6VY1M0"></script>
     <script>
@@ -55,7 +55,6 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2212940619560844&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
     <!-- ================= 追踪代码区结束 ================= -->
     
     <style>
@@ -183,23 +182,25 @@
         </div>
     </section>
 
-    <!-- 投票互动区 -->
-    <section class="voting-section">
-        <div class="voting-header">
+    <!-- 投票互动区 (由JS动态生成内容) -->
+    <section class="voting-section" style="padding: 40px 20px; max-width: 800px; margin: 0 auto;">
+        <div class="voting-header" style="text-align: center; margin-bottom: 30px;">
             <h2 dir="rtl">صوتوا لاختيار موقع فرعنا الأول في عمان 📍</h2>
             <p>Vote for our first location in Amman!</p>
         </div>
         
-        <div id="voting-grid" class="voting-grid">
+        <div id="voting-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
             <!-- 投票选项将由 JavaScript 动态生成填入这里 -->
         </div>
         
-        <p id="thank-you-msg" class="hidden-msg">🎉 شكراً لتصويتكم<br>Thank you for voting!</p>
+        <div id="thank-you-msg" class="hidden-msg">
+            🎉 شكراً لتصويتكم<br>Thank you for voting! Your VIP discount is secured.
+        </div>
     </section>
 
     <!-- 页脚与高清国旗区 -->
-    <footer>
-        <div class="global-flags">
+    <footer style="text-align: center; padding: 20px; background: #2b3d4f; color: #fff;">
+        <div class="global-flags" style="margin-bottom: 15px; font-size: 24px;">
             <i class="fi fi-jo" title="Jordan"></i>
             <i class="fi fi-cn" title="China"></i>
             <i class="fi fi-ae" title="United Arab Emirates"></i>
@@ -231,6 +232,7 @@
                     <p class="en-text-wa highlight-offer">🎁 Exclusive Offer: Enjoy a VIP discount for inquiries made before Dec 31, 2026!</p>
                 </div>
                 
+                <!-- 悬浮窗链接为最新的官方号码 +962771128288 -->
                 <a href="https://wa.me/962771128288?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9%20%D8%A8%D8%A7%D9%84%D8%B7%D9%81%D9%84" target="_blank" class="wa-chat-btn">
                     تواصل عبر واتساب | Chat on WhatsApp
                 </a>
@@ -269,11 +271,13 @@
                     <input type="text" name="Customer_Name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; color:#333; box-sizing: border-box;" placeholder="مثال: ريم أحمد">
                 </div>
                 
+                <!-- 【已更新】移除 WhatsApp 字段，换成宝妈年龄输入框 -->
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; font-size: 14px; font-weight: bold; color:#333;">رقم الواتساب (WhatsApp):</label>
-                    <input type="tel" name="WhatsApp_Number" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; color:#333; box-sizing: border-box;" placeholder="مثال: +962 7XXXXXXXX">
+                    <label style="display: block; margin-bottom: 5px; font-size: 14px; font-weight: bold; color:#333;">عمر الأم (Mom's Age):</label>
+                    <input type="number" name="Moms_Age" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; color:#333; box-sizing: border-box;" placeholder="مثال: 28">
                 </div>
                 
+                <!-- 保留原有的宝宝年龄下拉选项 -->
                 <div style="margin-bottom: 20px;">
                     <label style="display: block; margin-bottom: 5px; font-size: 14px; font-weight: bold; color:#333;">عمر الطفل (Age of Baby):</label>
                     <select name="Baby_Age" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; color:#333; box-sizing: border-box;">
@@ -349,7 +353,7 @@
             document.getElementById('lead-modal').style.display = 'none';
         }
 
-        // 需要控制 WhatsApp 弹窗的逻辑（保留您原有的）
+        // 控制 WhatsApp 弹窗的逻辑
         function toggleWaPopup() {
             const popup = document.getElementById('wa-popup');
             if (popup) {
